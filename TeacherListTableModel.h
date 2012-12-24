@@ -12,7 +12,7 @@ class TeacherListModel : public QAbstractTableModel {
     Q_OBJECT
 
 public:
-    TeacherListModel(QObject *parent);
+    TeacherListModel(Poco::NotificationCenter & notificationCenter, QObject *parent);
 
     int rowCount(const QModelIndex &parent = QModelIndex()) const;
     int columnCount(const QModelIndex &parent = QModelIndex()) const;
@@ -23,6 +23,7 @@ public:
     virtual void handle(const Poco::AutoPtr<CreateTeacherNotification> & notification);
 
 private:
+    Poco::NotificationCenter & notificationCenter;
     std::vector<Teacher> teachers;
 };
 

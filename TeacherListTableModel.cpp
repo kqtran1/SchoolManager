@@ -1,8 +1,10 @@
 #include "TeacherListTableModel.h"
 
-TeacherListModel::TeacherListModel(QObject *parent) :
-    QAbstractTableModel(parent), 
+TeacherListModel::TeacherListModel(Poco::NotificationCenter & notificationCenter, QObject *parent) :
+    QAbstractTableModel(parent),
+    notificationCenter(notificationCenter),
     teachers() {
+    notificationCenter.addObserver(Poco::NObserver<TeacherListPresenter, CreateTeacherNotification > (*this, &TeacherListPresenter::handle));
 }
 
 int TeacherListModel::rowCount(const QModelIndex & parent) const {

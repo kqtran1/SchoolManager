@@ -22,7 +22,6 @@ SOURCES += main.cpp \
     TeacherListTableModel.cpp \
     CreateTeacherPresenter.cpp \
     TeacherListView.cpp \
-    TeacherListPresenter.cpp \
     SchoolManagerApplication.cpp
 
 HEADERS  += \
@@ -41,7 +40,6 @@ HEADERS  += \
     TeacherListTableModel.h \
     CreateTeacherPresenter.h \
     TeacherListView.h \
-    TeacherListPresenter.h \
     SchoolManagerApplication.h
 
 FORMS    += \

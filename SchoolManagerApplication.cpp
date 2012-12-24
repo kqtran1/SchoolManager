@@ -2,7 +2,6 @@
 
 #include "CreateTeacherView.h"
 #include "CreateTeacherPresenter.h"
-#include "TeacherListPresenter.h"
 #include "TeacherListView.h"
 #include "utils.h"
 #include "TeacherListTableModel.h"
@@ -42,16 +41,13 @@ int MyApplication::run(int argc, char *argv[]) {
     bondDataDockWidget->setWidget(view->container());
     mainWindow.addDockWidget(Qt::LeftDockWidgetArea, bondDataDockWidget);
 
-    TeacherListModel model1(0);
+    TeacherListModel model1(notificationCenter, 0);
     MyCanvasViewPtr canvasView(new TeacherListView(&model1));
-    TeacherListPresenter canvasPresenter(canvasView, notificationCenter);
     QDockWidget * canvasDockWidget = new QDockWidget("My Canvas View");
     canvasDockWidget->setWidget(canvasView->container());
     mainWindow.addDockWidget(Qt::RightDockWidgetArea, canvasDockWidget);
 
-    TeacherListModel model2(0);
-    MyCanvasViewPtr canvasView2(new TeacherListView(&model2));
-    TeacherListPresenter canvasPresenter2(canvasView2, notificationCenter);
+    MyCanvasViewPtr canvasView2(new TeacherListView(&model1));
     QDockWidget * canvasDockWidget2 = new QDockWidget("My Canvas View");
     canvasDockWidget2->setWidget(canvasView2->container());
     mainWindow.setCentralWidget(canvasDockWidget2);
