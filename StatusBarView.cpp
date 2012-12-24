@@ -1,0 +1,27 @@
+#include "StatusBarView.h"
+
+#include <QtCore>
+
+StatusBarView::StatusBarView() : statusBar(new QStatusBar())
+{
+}
+
+
+StatusBarView::~StatusBarView()
+{
+}
+
+const QWidget* StatusBarView::container() const
+{
+	return statusBar;
+}
+
+QStatusBar* StatusBarView::statusBarWidget() const
+{
+	return statusBar;
+}
+
+void StatusBarView::showMessage( QString message )
+{
+    statusBar->showMessage(message);
+}
