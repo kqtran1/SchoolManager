@@ -16,7 +16,7 @@
 
 class TeacherListView : public View {
 public:
-    TeacherListView(TeacherListModel * model);
+    TeacherListView(TeacherListModel * model, Poco::NotificationCenter & notificationCenter);
     virtual ~TeacherListView();
     
     virtual QWidget* container() const;
@@ -29,6 +29,6 @@ private:
     QTableView * tableView;
 };
 
-typedef boost::shared_ptr<TeacherListView> MyCanvasViewPtr;
+typedef boost::shared_ptr<TeacherListView> TeacherListViewPtr;
 
 #endif

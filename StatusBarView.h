@@ -11,13 +11,14 @@
 class StatusBarView : public View
 {
 public:
-	StatusBarView();
+    StatusBarView(Poco::NotificationCenter & notificationCenter);
 	~StatusBarView();
 
 	virtual const QWidget* container() const;
 	QStatusBar* statusBarWidget() const;
 
     void showMessage(QString message);
+    void handle(const Poco::AutoPtr<CreateTeacherNotification> & notification);
 
 private:
 	QStatusBar * statusBar;

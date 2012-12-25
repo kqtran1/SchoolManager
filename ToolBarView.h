@@ -10,7 +10,7 @@
 
 #include <Poco/NotificationCenter.h>
 
-class ToolBarView : public QObject, public View {
+class ToolBarView : public View {
     Q_OBJECT
 public:
     ToolBarView(Poco::NotificationCenter & notificationCenter);
@@ -22,9 +22,6 @@ public:
 
 public slots:
     void openFileAction();
-
-protected:
-    Poco::NotificationCenter & notificationCenter;
 
 private:
 	QToolBar * toolBar;

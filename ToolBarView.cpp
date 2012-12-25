@@ -5,7 +5,7 @@
 #include <QtGui>
 
 ToolBarView::ToolBarView(Poco::NotificationCenter & notificationCenter):
-    notificationCenter(notificationCenter),
+    View(notificationCenter),
     toolBar(new QToolBar()),
     m_openFileAction(new QAction(QIcon(":/openFile.png"), "Open File", 0))
 {

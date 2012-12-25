@@ -6,10 +6,10 @@
 #include <QtCore/QObject>
 #include <boost/utility.hpp>
 
-class MyApplication : public boost::noncopyable {
+class SchoolManagerApplication : public boost::noncopyable {
 public:
-    MyApplication();
-    virtual ~MyApplication();
+    SchoolManagerApplication();
+    virtual ~SchoolManagerApplication();
     
     int run(int argc, char *argv[]);
 };

@@ -15,20 +15,18 @@ TEMPLATE = app
 SOURCES += main.cpp \
     ToolBarView.cpp \
     StatusBarView.cpp \
-    StatusBarPresenter.cpp \
     FileActionPresenter.cpp \
     CanvasWidget.cpp \
     CreateTeacherView.cpp \
     TeacherListTableModel.cpp \
-    CreateTeacherPresenter.cpp \
     TeacherListView.cpp \
-    SchoolManagerApplication.cpp
+    SchoolManagerApplication.cpp \
+    mvp/View.cpp
 
 HEADERS  += \
     utils.h \
     ToolBarView.h \
     StatusBarView.h \
-    StatusBarPresenter.h \
     FileActionPresenter.h \
     Event.h \
     CanvasWidget.h \
@@ -38,7 +36,6 @@ HEADERS  += \
     CreateTeacherForm.h \
     services/model/Teacher.h \
     TeacherListTableModel.h \
-    CreateTeacherPresenter.h \
     TeacherListView.h \
     SchoolManagerApplication.h
 

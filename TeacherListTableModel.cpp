@@ -1,10 +1,10 @@
 #include "TeacherListTableModel.h"
 
-TeacherListModel::TeacherListModel(Poco::NotificationCenter & notificationCenter, QObject *parent) :
-    QAbstractTableModel(parent),
+TeacherListModel::TeacherListModel(Poco::NotificationCenter & notificationCenter) :
+    QAbstractTableModel(),
     notificationCenter(notificationCenter),
     teachers() {
-    notificationCenter.addObserver(Poco::NObserver<TeacherListPresenter, CreateTeacherNotification > (*this, &TeacherListPresenter::handle));
+    notificationCenter.addObserver(Poco::NObserver<TeacherListModel, CreateTeacherNotification > (*this, &TeacherListModel::handle));
 }
 
 int TeacherListModel::rowCount(const QModelIndex & parent) const {
@@ -59,5 +59,5 @@ QVariant TeacherListModel::headerData(int section, Qt::Orientation orientation, 
 }
 
 void TeacherListModel::handle(const Poco::AutoPtr<CreateTeacherNotification> & notification) {
-    this->presenterView->addTeacher(notification->teacher());
+    addTeacher(notification->teacher());
 }

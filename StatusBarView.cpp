@@ -2,8 +2,11 @@
 
 #include <QtCore>
 
-StatusBarView::StatusBarView() : statusBar(new QStatusBar())
+StatusBarView::StatusBarView(Poco::NotificationCenter & notificationCenter) :
+    View(notificationCenter),
+    statusBar(new QStatusBar())
 {
+    notificationCenter.addObserver(Poco::NObserver<StatusBarView, CreateTeacherNotification > (*this, &StatusBarView::handle));
 }
 
 
@@ -24,4 +27,9 @@ QStatusBar* StatusBarView::statusBarWidget() const
 void StatusBarView::showMessage( QString message )
 {
     statusBar->showMessage(message);
+}
+
+void StatusBarView::handle(const Poco::AutoPtr<CreateTeacherNotification> & notification)
+{
+    showMessage(QString("Add New Teacher: ").append(notification->teacher().firstname));
 }

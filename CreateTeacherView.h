@@ -10,20 +10,21 @@
 #include <boost/shared_ptr.hpp>
 
 class CreateTeacherView : public View {
+    Q_OBJECT
 public:
-    CreateTeacherView();
+    CreateTeacherView(Poco::NotificationCenter & notificationCenter);
     virtual ~CreateTeacherView();
 
     virtual QWidget* container() const;
-    QLineEdit* firstnameInput() const;
-    QLineEdit* lastnameInput() const;
-    QPushButton* addButton() const;
 
-public:
+public slots:
+    void createTeacher();
+
+private:
     CreateTeacherForm * createTeacherForm;
 };
 
-typedef boost::shared_ptr<CreateTeacherView> BondViewPtr;
+typedef boost::shared_ptr<CreateTeacherView> CreateTeacherViewPtr;
 
 #endif
 

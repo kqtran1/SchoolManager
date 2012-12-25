@@ -2,10 +2,12 @@
 #include "SchoolManagerApplication.h"
 #include "TeacherListView.h"
 
-TeacherListView::TeacherListView(TeacherListModel * model) :
-tableView(new QTableView()),
-model(model),
-text("Default") {
+TeacherListView::TeacherListView(TeacherListModel * model, Poco::NotificationCenter & notificationCenter) :
+    View(notificationCenter),
+    tableView(new QTableView()),
+    model(model),
+    text("Default")
+{
     Logger::logConstructor("MyCanvasView");
     tableView->setModel(model);
     tableView->setMinimumSize(400, 400);
