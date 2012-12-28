@@ -1,14 +1,20 @@
 #include "TeacherListTableModel.h"
+#include "services/TeacherService.h"
+#include "Event.h"
 
-TeacherListModel::TeacherListModel(Poco::NotificationCenter & notificationCenter) :
+#include <Poco/NObserver.h>
+
+TeacherListModel::TeacherListModel(Poco::NotificationCenter & notificationCenter, TeacherService & teacherService) :
     QAbstractTableModel(),
     notificationCenter(notificationCenter),
-    teachers() {
+    teacherService(teacherService),
+    cachedTeacher(teacherService.all()) {
     notificationCenter.addObserver(Poco::NObserver<TeacherListModel, CreateTeacherNotification > (*this, &TeacherListModel::handle));
+
 }
 
 int TeacherListModel::rowCount(const QModelIndex & parent) const {
-    return teachers.size();
+    return cachedTeacher.size();
 }
 
 int TeacherListModel::columnCount(const QModelIndex & parent) const {
@@ -16,7 +22,7 @@ int TeacherListModel::columnCount(const QModelIndex & parent) const {
 }
 
 QVariant TeacherListModel::data(const QModelIndex &index, int role) const {
-    Teacher teacher = teachers[index.row()];
+    Teacher teacher = cachedTeacher[index.row()];
 
     if (role == Qt::DisplayRole) {
         int column = index.column();
@@ -32,12 +38,13 @@ QVariant TeacherListModel::data(const QModelIndex &index, int role) const {
 }
 
 void TeacherListModel::addTeacher(const Teacher & teacher) {
-    beginInsertRows(QModelIndex(), teachers.size(), teachers.size());
-    teachers.push_back(teacher);
+    int size = cachedTeacher.size();
+    beginInsertRows(QModelIndex(), size, size);
+    cachedTeacher.push_back(teacher);
     endInsertRows();
     
-    QModelIndex top = createIndex(teachers.size(), 0, (void*) 0);
-    QModelIndex bottom = createIndex(teachers.size(), 3, (void*) 0);
+    QModelIndex top = createIndex(size + 1, 0, (void*) 0);
+    QModelIndex bottom = createIndex(size + 1, 3, (void*) 0);
 
     emit dataChanged(top, bottom);
 }

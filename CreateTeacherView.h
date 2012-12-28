@@ -1,13 +1,10 @@
 #ifndef MYAPPLICATIONVIEW_H
 #define	MYAPPLICATIONVIEW_H
 
+#include "mvp/View.h"
 #include "CreateTeacherForm.h"
 
-#include "mvp/View.h"
-
-#include <QtGui>
-
-#include <boost/shared_ptr.hpp>
+class QWidget;
 
 class CreateTeacherView : public View {
     Q_OBJECT
@@ -23,8 +20,6 @@ public slots:
 private:
     CreateTeacherForm * createTeacherForm;
 };
-
-typedef boost::shared_ptr<CreateTeacherView> CreateTeacherViewPtr;
 
 #endif
 

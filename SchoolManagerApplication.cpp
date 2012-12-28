@@ -8,6 +8,8 @@
 #include "ToolBarView.h"
 #include "FileActionPresenter.h"
 #include "CanvasWidget.h"
+#include "services/SqliteTeacherService.h"
+#include "services/model/Teacher.h"
 
 #include <QtGui>
 
@@ -15,6 +17,10 @@
 #include <Poco/NotificationCenter.h>
 #include <Poco/Task.h>
 #include <Poco/TaskManager.h>
+
+#include <sqlite3.h>
+#include <vector>
+#include <iostream>
 
 SchoolManagerApplication::SchoolManagerApplication() {
     Logger::logConstructor("MyApplication");
@@ -38,7 +44,8 @@ int SchoolManagerApplication::run(int argc, char *argv[]) {
     bondDataDockWidget->setWidget(view.container());
     mainWindow.addDockWidget(Qt::LeftDockWidgetArea, bondDataDockWidget);
 
-    TeacherListModel teacherListModel(notificationCenter);
+    SqliteTeacherService teacherService;
+    TeacherListModel teacherListModel(notificationCenter, teacherService);
 
     TeacherListView canvasView(&teacherListModel, notificationCenter);
     QDockWidget * canvasDockWidget = new QDockWidget("My Canvas View");
@@ -58,6 +65,12 @@ int SchoolManagerApplication::run(int argc, char *argv[]) {
     mainWindow.addToolBar(toolBar.toolBarWidget());
 
     mainWindow.show();
+
+    std::vector<Teacher> teacherList = teacherService.all();
+
+    for(int i = 0; i < teacherList.size(); ++i) {
+        std::cout << teacherList[i].firstname.toStdString() << std::endl;
+    }
 
     return app.exec();
 }

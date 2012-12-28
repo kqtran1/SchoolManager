@@ -11,7 +11,6 @@
 #include <QWidget>
 #include <QMainWindow>
 
-#include <boost/shared_ptr.hpp>
 #include <string>
 
 class TeacherListView : public View {
@@ -28,7 +27,5 @@ private:
     TeacherListModel * model;
     QTableView * tableView;
 };
-
-typedef boost::shared_ptr<TeacherListView> TeacherListViewPtr;
 
 #endif

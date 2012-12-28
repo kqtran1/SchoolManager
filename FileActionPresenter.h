@@ -10,7 +10,7 @@ class FileActionPresenter : public Presenter<ToolBarView>
     Q_OBJECT
 public:
     FileActionPresenter(boost::shared_ptr<ToolBarView> view, Poco::NotificationCenter & notificationCenter);
-    ~FileActionPresenter();
+    virtual ~FileActionPresenter();
 
     virtual void openFileAction(const Poco::AutoPtr<OpenFileNotification> & notification);
 };

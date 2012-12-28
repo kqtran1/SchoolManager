@@ -2,17 +2,19 @@
 #define	TEACHERLISTTABLEMODEL_H
 
 #include "services/model/Teacher.h"
-#include "Event.h"
-#include "mvp/Presenter.h"
 #include "utils.h"
 
 #include <QtCore/QAbstractTableModel>
+#include <Poco/NotificationCenter.h>
+
+class TeacherService;
+class CreateTeacherNotification;
 
 class TeacherListModel : public QAbstractTableModel {
     Q_OBJECT
 
 public:
-    TeacherListModel(Poco::NotificationCenter & notificationCenter);
+    TeacherListModel(Poco::NotificationCenter & notificationCenter, TeacherService & teacherService);
 
     int rowCount(const QModelIndex &parent = QModelIndex()) const;
     int columnCount(const QModelIndex &parent = QModelIndex()) const;
@@ -24,7 +26,8 @@ public:
 
 private:
     Poco::NotificationCenter & notificationCenter;
-    std::vector<Teacher> teachers;
+    TeacherService & teacherService;
+    std::vector<Teacher> cachedTeacher;
 };
 
 #endif

@@ -2,6 +2,9 @@
 
 #include <QtCore>
 
+#include <QStatusBar>;
+#include <QString>;
+
 StatusBarView::StatusBarView(Poco::NotificationCenter & notificationCenter) :
     View(notificationCenter),
     statusBar(new QStatusBar())

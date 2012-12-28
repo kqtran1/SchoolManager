@@ -3,10 +3,10 @@
 
 #include "utils.h"
 
-#include <QWidget>
-#include <QString>
-#include <QPaintEvent>
-#include <QtCore/QString>
+#include <QWidget>;
+
+class QString;
+class QPaintEvent;
 
 class CanvasWidget : public QWidget {
 public:

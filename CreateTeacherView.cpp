@@ -2,7 +2,7 @@
 #include "SchoolManagerApplication.h"
 #include "utils.h"
 
-#include <QtGui>
+#include <QWidget>
 
 CreateTeacherView::CreateTeacherView(Poco::NotificationCenter & notificationCenter) :
     View(notificationCenter),
@@ -22,6 +22,10 @@ QWidget* CreateTeacherView::container() const {
 }
 
 void CreateTeacherView::createTeacher() {
-    Teacher newTeacher = {2, createTeacherForm->widget.firstnameInput->text(), createTeacherForm->widget.lastnameInput->text()};
+    Teacher newTeacher = {
+        2,
+        createTeacherForm->widget.firstnameInput->text(),
+        createTeacherForm->widget.lastnameInput->text()
+    };
     notificationCenter.postNotification(new CreateTeacherNotification(newTeacher));
 }

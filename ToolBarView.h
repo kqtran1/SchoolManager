@@ -6,7 +6,6 @@
 #include <QToolBar>
 #include <QAction>
 #include <QtCore/QObject>
-#include <boost/shared_ptr.hpp>
 
 #include <Poco/NotificationCenter.h>
 
@@ -27,8 +26,6 @@ private:
 	QToolBar * toolBar;
     QAction * m_openFileAction;
 };
-
-typedef boost::shared_ptr<ToolBarView> ToolBarViewPtr;
 
 #endif
 

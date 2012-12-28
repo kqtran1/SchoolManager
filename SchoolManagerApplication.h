@@ -3,15 +3,21 @@
 
 #include "utils.h"
 
-#include <QtCore/QObject>
 #include <boost/utility.hpp>
+
+class sqlite3;
 
 class SchoolManagerApplication : public boost::noncopyable {
 public:
     SchoolManagerApplication();
-    virtual ~SchoolManagerApplication();
+    ~SchoolManagerApplication();
     
     int run(int argc, char *argv[]);
+
+private:
+    void createTables(sqlite3 *db);
+    void insertData(sqlite3 *db);
+    void printData(sqlite3 *db);
 };
 
 #endif

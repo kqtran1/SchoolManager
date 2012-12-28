@@ -21,7 +21,9 @@ SOURCES += main.cpp \
     TeacherListTableModel.cpp \
     TeacherListView.cpp \
     SchoolManagerApplication.cpp \
-    mvp/View.cpp
+    mvp/View.cpp \
+    services/TeacherService.cpp \
+    services/SqliteTeacherService.cpp
 
 HEADERS  += \
     utils.h \
@@ -37,10 +39,11 @@ HEADERS  += \
     services/model/Teacher.h \
     TeacherListTableModel.h \
     TeacherListView.h \
-    SchoolManagerApplication.h
+    SchoolManagerApplication.h \
+    services/TeacherService.h \
+    services/SqliteTeacherService.h
 
 FORMS    += \
-    BondComputationResultForm.ui \
     CreateTeacherForm.ui
 
 RESOURCES += \
@@ -63,3 +66,14 @@ else:unix: LIBS += -L$$PWD/../../../dev/poco-1.4.3p1/lib/Darwin/x86_64/ -lPocoUt
 
 INCLUDEPATH += $$PWD/../../../dev/poco-1.4.3p1/Util/include
 DEPENDPATH += $$PWD/../../../dev/poco-1.4.3p1/Util/include
+
+win32:CONFIG(release, debug|release): LIBS += -L$$PWD/../../../../usr/local/Cellar/sqlite/3.7.7.1/lib/release/ -lsqlite3
+else:win32:CONFIG(debug, debug|release): LIBS += -L$$PWD/../../../../usr/local/Cellar/sqlite/3.7.7.1/lib/debug/ -lsqlite3
+else:unix: LIBS += -L$$PWD/../../../../usr/local/Cellar/sqlite/3.7.7.1/lib/ -lsqlite3
+
+INCLUDEPATH += $$PWD/../../../../usr/local/Cellar/sqlite/3.7.7.1/include
+DEPENDPATH += $$PWD/../../../../usr/local/Cellar/sqlite/3.7.7.1/include
+
+win32:CONFIG(release, debug|release): PRE_TARGETDEPS += $$PWD/../../../../usr/local/Cellar/sqlite/3.7.7.1/lib/release/sqlite3.lib
+else:win32:CONFIG(debug, debug|release): PRE_TARGETDEPS += $$PWD/../../../../usr/local/Cellar/sqlite/3.7.7.1/lib/debug/sqlite3.lib
+else:unix: PRE_TARGETDEPS += $$PWD/../../../../usr/local/Cellar/sqlite/3.7.7.1/lib/libsqlite3.a
