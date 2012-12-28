@@ -1,4 +1,4 @@
-SchoolManager
+HotelManager
 =============
 
-School Manager
+Hotel Manager
