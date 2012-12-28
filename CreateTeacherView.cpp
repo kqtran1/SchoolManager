@@ -2,19 +2,21 @@
 #include "SchoolManagerApplication.h"
 #include "utils.h"
 
+#include <cstdlib>
+
 #include <QWidget>
 
 CreateTeacherView::CreateTeacherView(Poco::NotificationCenter & notificationCenter) :
     View(notificationCenter),
     createTeacherForm(new CreateTeacherForm())
 {
-    Logger::logConstructor("MyApplicationView");
+    Logger::logConstructor("CreateTeacherView");
 
     QObject::connect(createTeacherForm->widget.addButton, SIGNAL(clicked()), this, SLOT(createTeacher()));
 }
 
 CreateTeacherView::~CreateTeacherView() {
-    Logger::logDestructor("MyApplicationView");
+    Logger::logDestructor("CreateTeacherView");
 }
 
 QWidget* CreateTeacherView::container() const {
@@ -22,8 +24,9 @@ QWidget* CreateTeacherView::container() const {
 }
 
 void CreateTeacherView::createTeacher() {
+
     Teacher newTeacher = {
-        2,
+        rand() + 2000,
         createTeacherForm->widget.firstnameInput->text(),
         createTeacherForm->widget.lastnameInput->text()
     };

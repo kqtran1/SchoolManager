@@ -32,7 +32,6 @@ SchoolManagerApplication::~SchoolManagerApplication() {
 
 int SchoolManagerApplication::run(int argc, char *argv[]) {
     
-
     QApplication app(argc, argv);
 
     Poco::NotificationCenter notificationCenter;

@@ -13,7 +13,7 @@ class ToolBarView : public View {
     Q_OBJECT
 public:
     ToolBarView(Poco::NotificationCenter & notificationCenter);
-    ~ToolBarView();
+    virtual ~ToolBarView();
 
 	virtual const QWidget* container() const;
     QToolBar* toolBarWidget() const;

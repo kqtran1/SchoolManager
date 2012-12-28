@@ -27,7 +27,7 @@ QVariant TeacherListModel::data(const QModelIndex &index, int role) const {
     if (role == Qt::DisplayRole) {
         int column = index.column();
         if (column == 0) {
-            return QString("ID");
+            return QVariant(teacher.id);
         } else if (column == 1) {
             return teacher.firstname;
         } else if (column == 2) {
@@ -41,6 +41,7 @@ void TeacherListModel::addTeacher(const Teacher & teacher) {
     int size = cachedTeacher.size();
     beginInsertRows(QModelIndex(), size, size);
     cachedTeacher.push_back(teacher);
+    teacherService.create(teacher);
     endInsertRows();
     
     QModelIndex top = createIndex(size + 1, 0, (void*) 0);

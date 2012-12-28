@@ -23,7 +23,6 @@ public:
 
 private:
     std::string compText;
-    ;
 };
 
 class CreateTeacherNotification : public Poco::Notification {

@@ -13,7 +13,6 @@
 class View : public QObject, public boost::noncopyable {
 public:
     View(Poco::NotificationCenter & notificationCenter);
-
     virtual ~View();
 
     virtual const QWidget* container() const = 0;

@@ -2,11 +2,10 @@
 #define TEACHER_H
 
 #include <QString>
-#include <string>
 
 typedef struct
 {
-    int m_id;
+    int id;
     QString firstname;
     QString lastname;
 } Teacher;

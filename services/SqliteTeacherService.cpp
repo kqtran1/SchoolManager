@@ -5,6 +5,10 @@
 #include <sstream>
 #include <boost/lexical_cast.hpp>
 
+// use a namespace
+static const char * CREATE_TEACHER_TABLE_QUERY = "CREATE TABLE teacher(id INT primary key, firstname VARCHAR(50), lastname VARCHAR(50))";
+static const char * INSERT_QUERY = "INSERT INTO teacher(id, firstname, lastname) VALUES(?,?,?)";
+
 // Use Resource Manager
 SqliteTeacherService::SqliteTeacherService()
 {
@@ -19,11 +23,22 @@ SqliteTeacherService::SqliteTeacherService()
 
 SqliteTeacherService::~SqliteTeacherService()
 {
+    //sqlite3_finalize(statement);
     sqlite3_close(db);
 }
 
 void SqliteTeacherService::create(const Teacher & newTeaher) {
+    sqlite3_stmt * insertStatement;
+    if(sqlite3_prepare_v2(db, INSERT_QUERY, -1, &insertStatement, NULL) == SQLITE_OK) {
+        sqlite3_bind_int(insertStatement, 1, newTeaher.id);
+        sqlite3_bind_text(insertStatement, 2, newTeaher.firstname.toStdString().c_str(), -1, SQLITE_TRANSIENT);
+        sqlite3_bind_text(insertStatement, 3, newTeaher.lastname.toStdString().c_str(), -1, SQLITE_TRANSIENT);
 
+        if(sqlite3_step(insertStatement) != SQLITE_DONE) {
+            std::cout << "Somthing wrong happend" << std::endl;
+        }
+    }
+    sqlite3_finalize(insertStatement);
 }
 
 void SqliteTeacherService::remove(const int teacherId) {
@@ -57,9 +72,8 @@ const std::vector<Teacher> SqliteTeacherService::all() {
 
 void SqliteTeacherService::createTables()
 {
-    const char * query = "CREATE TABLE teacher(id INT primary key, firstname VARCHAR(50), lastname VARCHAR(50))";
     sqlite3_stmt *createStatement;
-    int prepRes = sqlite3_prepare_v2(db, query, -1, &createStatement, NULL);
+    int prepRes = sqlite3_prepare_v2(db, CREATE_TEACHER_TABLE_QUERY, -1, &createStatement, NULL);
     if(prepRes == SQLITE_OK) {
         if(sqlite3_step(createStatement) != SQLITE_DONE) {
             std::cout << "Somthing wrong happend" << std::endl;
